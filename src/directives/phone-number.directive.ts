@@ -1,4 +1,5 @@
 import { Directive } from "../decorators/directive";
+import { Input } from "../decorators/input";
 import { NumberFormatter } from "../services/number-formatter";
 
 @Directive({
@@ -13,6 +14,7 @@ import { NumberFormatter } from "../services/number-formatter";
   ],
 })
 export class PhoneNumberDirective {
+  @Input("with-spaces")
   withSpaces = true;
 
   constructor(
@@ -21,9 +23,6 @@ export class PhoneNumberDirective {
   ) {}
 
   init() {
-    let withSpacesAttr = this.element.getAttribute("with-spaces") || "true";
-    this.withSpaces = withSpacesAttr === "true";
-
     this.element.addEventListener("input", () => {
       this.element.value = this.formatter.format(
         this.element.value,
