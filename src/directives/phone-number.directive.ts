@@ -25,8 +25,6 @@ export class PhoneNumberDirective {
     const target = event.target as HTMLInputElement;
 
     this.value = this.formatter.format(target.value, 10, 2, this.withSpaces);
-
-    Detector.digest();
   }
 
   @HostBinding("value")
