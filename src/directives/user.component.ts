@@ -1,8 +1,15 @@
+import { Component } from "../decorators/component";
 import { Directive } from "../decorators/directive";
 import { Input } from "../decorators/input";
 
-@Directive({
+@Component({
   selector: "user",
+  template: `
+    <article>
+      <h2>{{ fullName }} ({{ age }} ans)</h2>
+      <strong>Poste : {{ position }}</strong>
+    </article>
+  `,
 })
 export class UserComponent {
   @Input("full-name")
@@ -15,23 +22,4 @@ export class UserComponent {
   position: string;
 
   constructor(private element: HTMLElement) {}
-
-  render() {
-    this.element.innerHTML = `
-              <article>
-                  <h2>${this.fullName} (${this.age} ans)</h2>
-                  <strong>Poste : ${this.position}</strong>
-              </article>
-          `;
-
-    this.element.querySelector("article").addEventListener("click", () => {
-      this.age++;
-
-      this.render();
-    });
-  }
-
-  init() {
-    this.render();
-  }
 }

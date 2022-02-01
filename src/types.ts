@@ -10,7 +10,11 @@ export type FramewokMetadata = {
   providers?: Providers;
 };
 
-export type DirectiveMetadata = {
+export interface DirectiveMetadata {
   selector: string;
   providers?: Providers;
-};
+}
+
+export interface ComponentMetadata extends DirectiveMetadata {
+  template: string;
+}
