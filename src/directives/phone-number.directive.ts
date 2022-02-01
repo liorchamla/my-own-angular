@@ -2,6 +2,14 @@ import { NumberFormatter } from "../services/number-formatter";
 
 export class PhoneNumberDirective {
   static selector = "[phone-number]";
+  static providers = [
+    {
+      provide: "formatter",
+      factory: () => {
+        return new NumberFormatter();
+      },
+    },
+  ];
 
   withSpaces = true;
 
