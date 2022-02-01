@@ -1,4 +1,6 @@
 export class PhoneNumberDirective {
+  static selector = "[phone-number]";
+
   withSpaces = true;
 
   constructor(private element: HTMLInputElement) {}

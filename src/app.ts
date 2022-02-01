@@ -1,12 +1,13 @@
 import { CreditCardDirective } from "./directives/credit-card.directive";
 import { PhoneNumberDirective } from "./directives/phone-number.directive";
 
-document.querySelectorAll("[phone-number]").forEach((element) => {
-  const instance = new PhoneNumberDirective(element as HTMLInputElement);
-  instance.init();
-});
+const declarations = [CreditCardDirective, PhoneNumberDirective];
 
-document.querySelectorAll("[credit-card]").forEach((element) => {
-  const instance = new CreditCardDirective(element as HTMLInputElement);
-  instance.init();
+declarations.forEach((directive) => {
+  const selector = directive.selector;
+
+  document.querySelectorAll(selector).forEach((element) => {
+    const instance = new directive(element as HTMLInputElement);
+    instance.init();
+  });
 });

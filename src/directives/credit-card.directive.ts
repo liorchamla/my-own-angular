@@ -1,4 +1,6 @@
 export class CreditCardDirective {
+  static selector = "[credit-card]";
+
   withSpaces = true;
   constructor(private element: HTMLInputElement) {}
 
