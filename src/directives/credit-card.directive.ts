@@ -1,4 +1,5 @@
 import { Directive } from "../decorators/directive";
+import { HostListener } from "../decorators/host-listener";
 import { Input } from "../decorators/input";
 import { NumberFormatter } from "../services/number-formatter";
 
@@ -14,14 +15,13 @@ export class CreditCardDirective {
     private formatter: NumberFormatter
   ) {}
 
-  init() {
-    this.element.addEventListener("input", () => {
-      this.element.value = this.formatter.format(
-        this.element.value,
-        16,
-        4,
-        this.withSpaces
-      );
-    });
+  @HostListener("input")
+  formatValue() {
+    this.element.value = this.formatter.format(
+      this.element.value,
+      16,
+      4,
+      this.withSpaces
+    );
   }
 }
