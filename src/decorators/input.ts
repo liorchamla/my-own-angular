@@ -1,4 +1,4 @@
-export const Input = (attrName: string) => {
+export const Input = (attrName: string = "") => {
   return function (decoratedClass, propertyKey) {
     const originalInit: Function = decoratedClass["init"] || function () {};
 
@@ -8,7 +8,7 @@ export const Input = (attrName: string) => {
       }
 
       if (this.element.hasAttribute(`[${attrName}]`)) {
-        this[propertyKey] = eval(this.element.getAttribute(attrName));
+        this[propertyKey] = eval(this.element.getAttribute(`[${attrName}]`));
       } else if (this.element.hasAttribute(attrName)) {
         this[propertyKey] = this.element.getAttribute(attrName);
       }
