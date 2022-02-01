@@ -1,4 +1,5 @@
 import { Directive } from "../decorators/directive";
+import { HostBinding } from "../decorators/host-binding";
 import { HostListener } from "../decorators/host-listener";
 import { Input } from "../decorators/input";
 import { NumberFormatter } from "../services/number-formatter";
@@ -24,6 +25,9 @@ export class PhoneNumberDirective {
 
     target.value = this.formatter.format(target.value, 10, 2, this.withSpaces);
   }
+
+  @HostBinding("value")
+  value: string = "toto";
 
   constructor(private formatter: NumberFormatter) {}
 }
