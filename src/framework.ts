@@ -1,8 +1,19 @@
+import { Detector } from "./change-detection";
 import { FramewokMetadata, Providers } from "./types";
 
 export class Framework {
   declarations: any[] = [];
   providers: Providers = [];
+  instances: any[] = [];
+
+  digest() {
+    Detector.digest();
+    this.instances.forEach((instance) => {
+      if (instance["render"]) {
+        instance["render"]();
+      }
+    });
+  }
 
   bootstrap(frameworkMetadata: FramewokMetadata) {
     this.declarations = frameworkMetadata.declarations;
@@ -19,10 +30,16 @@ export class Framework {
 
         const instance = Reflect.construct(directive, params);
 
+        this.instances.push(instance);
+
         instance.element = element;
 
         if (instance.init) {
           instance.init();
+        }
+
+        if (instance.render) {
+          instance.render();
         }
       });
     });
@@ -88,3 +105,5 @@ export class Framework {
     return params;
   }
 }
+
+export const Angular = new Framework();

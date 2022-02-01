@@ -8,6 +8,7 @@ import { Input } from "../decorators/input";
     <article>
       <h2>{{ fullName }} ({{ age }} ans)</h2>
       <strong>Poste : {{ position }}</strong>
+      <button (click)="increment()">Incrémenter l'age</button>
     </article>
   `,
 })
@@ -20,6 +21,10 @@ export class UserComponent {
 
   @Input()
   position: string;
+
+  increment() {
+    this.age++;
+  }
 
   constructor(private element: HTMLElement) {}
 }
