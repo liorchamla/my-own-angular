@@ -1,16 +1,10 @@
+import { Directive } from "../decorators/directive";
 import { NumberFormatter } from "../services/number-formatter";
 
+@Directive({
+  selector: "[credit-card]",
+})
 export class CreditCardDirective {
-  static selector = "[credit-card]";
-  static providers = [
-    // {
-    //   provide: "formatter",
-    //   factory: () => {
-    //     return new NumberFormatter();
-    //   },
-    // },
-  ];
-
   withSpaces = true;
   constructor(
     private element: HTMLInputElement,

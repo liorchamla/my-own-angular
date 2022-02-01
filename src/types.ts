@@ -9,3 +9,8 @@ export type FramewokMetadata = {
   declarations: any[];
   providers?: Providers;
 };
+
+export type DirectiveMetadata = {
+  selector: string;
+  providers?: Providers;
+};

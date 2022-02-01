@@ -1,16 +1,18 @@
+import { Directive } from "../decorators/directive";
 import { NumberFormatter } from "../services/number-formatter";
 
-export class PhoneNumberDirective {
-  static selector = "[phone-number]";
-  static providers = [
+@Directive({
+  selector: "[phone-number]",
+  providers: [
     {
       provide: "formatter",
       factory: () => {
         return new NumberFormatter();
       },
     },
-  ];
-
+  ],
+})
+export class PhoneNumberDirective {
   withSpaces = true;
 
   constructor(
