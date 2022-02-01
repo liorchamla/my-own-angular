@@ -1,10 +1,13 @@
-export class Framework {
-  constructor(
-    private declarations: any[] = [],
-    private providers: any[] = []
-  ) {}
+import { FramewokMetadata, Providers } from "./types";
 
-  bootstrap() {
+export class Framework {
+  declarations: any[] = [];
+  providers: Providers = [];
+
+  bootstrap(frameworkMetadata: FramewokMetadata) {
+    this.declarations = frameworkMetadata.declarations;
+    this.providers = frameworkMetadata.providers || [];
+
     this.declarations.forEach((directive) => {
       const selector = directive.selector;
 
