@@ -3,12 +3,12 @@ import { NumberFormatter } from "../services/number-formatter";
 export class CreditCardDirective {
   static selector = "[credit-card]";
   static providers = [
-    {
-      provide: "formatter",
-      factory: () => {
-        return new NumberFormatter();
-      },
-    },
+    // {
+    //   provide: "formatter",
+    //   factory: () => {
+    //     return new NumberFormatter();
+    //   },
+    // },
   ];
 
   withSpaces = true;
