@@ -1,25 +1,26 @@
+import { NumberFormatter } from "../services/number-formatter";
+
 export class PhoneNumberDirective {
   static selector = "[phone-number]";
 
   withSpaces = true;
 
-  constructor(private element: HTMLInputElement) {}
+  constructor(
+    private element: HTMLInputElement,
+    private formatter: NumberFormatter
+  ) {}
 
   init() {
     let withSpacesAttr = this.element.getAttribute("with-spaces") || "true";
     this.withSpaces = withSpacesAttr === "true";
 
     this.element.addEventListener("input", () => {
-      let value = this.element.value;
-      value = value.replace(/[^\d+]/g, "").substring(0, 10);
-
-      const numbersGroups = [];
-
-      for (let i = 0; i < value.length; i += 2) {
-        numbersGroups.push(value.substring(i, i + 2));
-      }
-
-      this.element.value = numbersGroups.join(this.withSpaces ? " " : "");
+      this.element.value = this.formatter.format(
+        this.element.value,
+        10,
+        2,
+        this.withSpaces
+      );
     });
   }
 }
