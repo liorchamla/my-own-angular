@@ -1,3 +1,4 @@
+import { Detector } from "../change-detection";
 import { Directive } from "../decorators/directive";
 import { HostBinding } from "../decorators/host-binding";
 import { HostListener } from "../decorators/host-listener";
@@ -23,11 +24,13 @@ export class PhoneNumberDirective {
   formatValue(event: InputEvent) {
     const target = event.target as HTMLInputElement;
 
-    target.value = this.formatter.format(target.value, 10, 2, this.withSpaces);
+    this.value = this.formatter.format(target.value, 10, 2, this.withSpaces);
+
+    Detector.digest();
   }
 
   @HostBinding("value")
-  value: string = "toto";
+  value: string = "";
 
   constructor(private formatter: NumberFormatter) {}
 }
