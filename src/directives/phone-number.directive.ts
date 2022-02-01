@@ -19,17 +19,11 @@ export class PhoneNumberDirective {
   withSpaces = true;
 
   @HostListener("input")
-  formatValue() {
-    this.element.value = this.formatter.format(
-      this.element.value,
-      10,
-      2,
-      this.withSpaces
-    );
+  formatValue(event: InputEvent) {
+    const target = event.target as HTMLInputElement;
+
+    target.value = this.formatter.format(target.value, 10, 2, this.withSpaces);
   }
 
-  constructor(
-    private element: HTMLInputElement,
-    private formatter: NumberFormatter
-  ) {}
+  constructor(private formatter: NumberFormatter) {}
 }

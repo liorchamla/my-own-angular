@@ -10,18 +10,11 @@ export class CreditCardDirective {
   @Input("with-spaces")
   withSpaces = true;
 
-  constructor(
-    private element: HTMLInputElement,
-    private formatter: NumberFormatter
-  ) {}
+  constructor(private formatter: NumberFormatter) {}
 
   @HostListener("input")
-  formatValue() {
-    this.element.value = this.formatter.format(
-      this.element.value,
-      16,
-      4,
-      this.withSpaces
-    );
+  formatValue(event: InputEvent) {
+    const target = event.target as HTMLInputElement;
+    target.value = this.formatter.format(target.value, 16, 4, this.withSpaces);
   }
 }

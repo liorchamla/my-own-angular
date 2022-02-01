@@ -18,7 +18,12 @@ export class Framework {
         );
 
         const instance = Reflect.construct(directive, params);
-        instance.init();
+
+        instance.element = element;
+
+        if (instance.init) {
+          instance.init();
+        }
       });
     });
   }
